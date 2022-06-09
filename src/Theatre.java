@@ -1,13 +1,12 @@
 import java.util.*;
-
 public class Theatre {
     private final String theatreName;
     private List<Seat> seats = new ArrayList<>();
 
     public Theatre(String theatreName, int numRows, int seatsPerRow) {
-        this.theatre = theatreName;
+        this.theatreName = theatreName;
 
-        int lastRow = 'A' + (numRows - 1);
+        int lastRow = 'A' + (numRows -1);
         for (char row = 'A'; row <= lastRow; row++) {
             for(int seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
                 Seat seat = new Seat(row + String.format("%02d", seatNum));
@@ -20,7 +19,7 @@ public class Theatre {
         return theatreName;
     }
 
-    public boolean reserveSeat (String seatNumber) {
+    public boolean reserveSeat(String seatNumber) {
         Seat requestedSeat = null;
         for(Seat seat : seats) {
             if(seat.getSeatNumber().equals(seatNumber)) {
@@ -34,7 +33,24 @@ public class Theatre {
             return false;
         }
 
-        return requestedSeat.reserve();
+        return requestedSeat.reserva();
+    }
+
+    public boolean cancelSeatReservation(String seatNumber) {
+        Seat requestedSeat = null;
+        for(Seat seat : seats) {
+            if(seat.getSeatNumber().equals(seatNumber)) {
+                requestedSeat = seat;
+                break;
+            }
+        }
+
+        if(requestedSeat == null) {
+            System.out.println("There is no seat " + seatNumber);
+            return false;
+        }
+
+        return requestedSeat.cancel();
     }
 
     public void getSeats() {
@@ -43,36 +59,22 @@ public class Theatre {
         }
     }
 
-    private class Seat {
-        private final String seatNumber;
-        private boolean reserved = false;
-
-        public Seat(String seatNumber) {
-            this.seatNumber = seatNumber;
+    /*public void printSeats(){
+        int counter = 0;
+        for(Seat1 seat : seats){
+            System.out.printf("%s ", seat.getSeatNumber());
+            counter++;
+            if(counter % this.seatsPerRow == 0)
+                System.out.printf("%n");
         }
-
-        public boolean reserve() {
-            if(!this.reserved) {
-                this.reserved = true;
-                System.out.prinlnt("Seat " + seatNumber + " reserved");
-                return true;
-            } else {
-                return false;
-            }
+    }
+    public void printReservedSeats(){
+        System.out.print("Reserved seats: ");
+        for(Seat1 seat : seats){
+            if(seat.isReserved())
+                System.out.printf("%s ", seat.getSeatNumber());
         }
+        System.out.printf("%n");
+    }*/
 
-        public boolean cancel() {
-            if (this.reserved) {
-                this.reserved = false;
-                System.out.println("Reservation of seat " + seatNumber + " cancelled.");
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        public String getSeatNumber() {
-            return seatNumber;
-        }
-    }}
 }

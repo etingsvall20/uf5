@@ -1,13 +1,13 @@
 import java.util.Arrays;
 
-public class MyIntArray {
+public class MyCharArray {
     private boolean empty = true;
-    private final int[] myIntArray;
+    private final char[] myCharArray;
     private int i;
     private int elementsCount = 0;
 
-    public MyIntArray(int tamany) {
-        this.myIntArray = new int[tamany];
+    public MyCharArray(int tamany) {
+        this.myCharArray = new char[tamany];
     }
 
     public int size() {
@@ -16,8 +16,8 @@ public class MyIntArray {
 
     public boolean contains(int n) {
         boolean container = true;
-        for (i = 0; myIntArray.length > i; ++i) {
-            if (myIntArray[i] == n) {
+        for (i = 0; myCharArray.length > i; ++i) {
+            if (myCharArray[i] == n) {
                 container = false;
             } else {
                 container = true;
@@ -27,18 +27,18 @@ public class MyIntArray {
     }
 
     public boolean clear() {
-        for(i = 0; myIntArray.length > i; i++) {
-            myIntArray[i] = Integer.parseInt(null);
+        for(i = 0; myCharArray.length > i; i++) {
+            myCharArray[i] = ' ';
         }
         elementsCount = 0;
         empty = true;
         return empty;
     }
 
-    public boolean addElement(int element, int index) {
+    public boolean addElement(char element, int index) {
         try {
-            if (element != Integer.parseInt(null)) {
-                myIntArray[index] = element;
+            if (element != ' ') {
+                myCharArray[index] = element;
                 ++elementsCount;
                 empty = true;
             }
@@ -50,9 +50,9 @@ public class MyIntArray {
 
     public void removeElement(int index) {
         try {
-            myIntArray[index] = Integer.parseInt(null);
-            --elementsCount;
-            if (myIntArray.length > 1) {
+            myCharArray[index] = ' ';
+            elementsCount--;
+            if (myCharArray.length > 1) {
                 empty = true;
             }
         } catch (IndexOutOfBoundsException var3) {
@@ -70,6 +70,6 @@ public class MyIntArray {
         return empty;
     }
     public void print() {
-        System.out.println(Arrays.toString(myIntArray));
+        System.out.println(Arrays.toString(myCharArray));
     }
 }
